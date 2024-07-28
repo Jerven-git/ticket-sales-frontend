@@ -11,34 +11,42 @@
     </div>
     <!-- Right column -->
     <div class="flex flex-col items-center justify-center w-full md:w-1/2 px-6 py-8 mx-auto lg:py-0">
-      <router-link :to="{ name: 'home', params: { username: 'erina' } }" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-dark-gray">
-        <img src="https://imgur.com/Z4D4Cx5.png" width="200" alt="logo">
-      </router-link >
+      <router-link
+        :to="{ name: 'home' }"
+        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-dark-gray">
+        <img
+          src="https://imgur.com/Z4D4Cx5.png"
+          width="200"
+          alt="logo">
+      </router-link>
       <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-dark-gray">
             Sign in to your account
           </h1>
-          <form class="space-y-4 md:space-y-6" action="#">
+          <form @submit.prevent="loginUser" class="space-y-4 md:space-y-6" action="#">
             <div>
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark-gray">Your email</label>
               <input
                 type="email"
+                v-model="email"
                 name="email"
                 id="email"
                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5
-                dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="name@company.com" required>
             </div>
             <div>
               <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-dark-gray">Password</label>
               <input
                 type="password"
+                v-model="password"
                 name="password"
                 id="password"
                 placeholder="••••••••"
                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5
-                dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                dark:bg-light-gray dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required>
             </div>
             <div class="flex items-center justify-between">
               <div class="flex items-start">
@@ -55,7 +63,11 @@
                   <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
                 </div>
               </div>
-              <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+              <a
+                href="#"
+                class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
+                Forgot password?
+              </a>
             </div>
             <button
                 type="submit"
@@ -64,7 +76,8 @@
                 Sign in
             </button>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              Don’t have an account yet? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+              Don’t have an account yet? 
+              <router-link :to="{ name: 'register' }" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</router-link>
             </p>
           </form>
         </div>
@@ -75,8 +88,72 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useAuthStore } from '../store/authLogin';
 
 export default defineComponent({
   name: 'UserLogin',
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+
+  setup() {
+    const authStore = useAuthStore();
+
+    return {
+      authStore,
+    };
+  },
+
+  methods: {
+     loginUser() {
+      this.authStore.login({
+      email: this.email,
+      password: this.password,
+    });
+      this.email = '';
+      this.password = '';
+    },
+  },
+  
+  // methods: {
+  //   async loginUser() {
+  //     try {
+  //       await this.$axios.get(process.env.VUE_APP_BASE_URL + '/sanctum/csrf-cookie');
+
+  //         const response = await this.$axios.post('/v1/auth/login', {
+  //         email: this.email,
+  //         password: this.password
+  //       });
+
+  //       this.$notify({
+  //         type: 'success',
+  //         title: 'Success',
+  //         text: response.data.message
+  //       });
+
+  //       this.email = '';
+  //       this.password = '';
+
+  //       this.$router.push({ name: 'home' });
+  //     } catch (error: any) {
+  //       if (error.response && error.response.data.errors) {
+  //         this.$notify({
+  //           type: 'error',
+  //           title: 'Error',
+  //           text: error.response.data.errors.join(', ')
+  //         });
+  //       } else {
+  //         this.$notify({
+  //           type: 'error',
+  //           title: 'Error',
+  //           text: 'An error occurred. Please try again.'
+  //         });
+  //       }
+  //     }
+  //   }
+  // }
 });
 </script>

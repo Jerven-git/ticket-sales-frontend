@@ -26,3 +26,16 @@ exit
 npm install vue-router
 vue add router
 exit
+clear
+npm install --save axios vue-axios
+clear
+npm install --save vue-notification
+npm install --save @kyvg/vue3-notification
+clear
+exit
+vue --version
+npm run vue --version
+exit
+npm install pinia-plugin-persistedstate
+clear
+exit
