@@ -1,12 +1,12 @@
 // main.ts
 import { createApp } from 'vue';
-import App from './App.vue';
-import pinia from './store/store';
+import App from '@/App.vue';
+import pinia from '@/store/store';
 import './assets/index.css';
-import router from './router';
-import axiosPlugin from './axios/axios';
+import router from '@/router';
+import axiosPlugin from '@/axios/axios';
 import notifications from '@kyvg/vue3-notification';
-import { useAuthStore } from './store/authLogin';
+import { useAuthStore } from '@/store/authLogin';
 
 const app = createApp(App);
 

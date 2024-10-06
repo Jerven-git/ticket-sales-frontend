@@ -12,6 +12,7 @@
     "@kyvg/vue3-notification": "^3.2.1",
     "axios": "^1.7.2",
     "core-js": "^3.8.3",
+    "moment-timezone": "^0.5.46",
     "pinia": "^2.2.0",
     "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.2.13",
@@ -19,6 +20,7 @@
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
+    "@types/moment-timezone": "^0.5.30",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",

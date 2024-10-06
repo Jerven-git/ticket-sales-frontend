@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { axiosInstance } from '../axios/axios'; // Adjust the import path as needed
-import router from '../router'
+import { axiosInstance } from '@/axios/axios'; // Adjust the import path as needed
+import router from '@/router'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -36,10 +36,16 @@ export const useAuthStore = defineStore('auth', {
         });
         router.push({ name: 'home' });
       } catch (error: any) {
+        let errorMessage = 'An unknown error occurred';
+
+        if (error.response && error.response.data && error.response.data.error) {
+            errorMessage = error.response.data.error;
+        }
+    
         this.$notify({
-          type: 'error',
-          title: 'Login Failed',
-          text: error.response.data.errors.join(', ')
+            type: 'error',
+            title: 'Login Failed',
+            text: errorMessage
         });
       }
     },
