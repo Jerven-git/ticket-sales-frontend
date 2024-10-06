@@ -1,5 +1,5 @@
 <template>
-<nav class="bg-light-gray fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+<nav class="sticky bg-light-gray w-full z-20 top-0 start-0 border-b border-gray-200">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <router-link :to="{ name: 'home' }" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="https://imgur.com/Z4D4Cx5.png" class="h-8" alt="Gather Logo">
@@ -60,7 +60,7 @@
         </li>
         <li>
             <router-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'create-event' }"
               class="block py-2 px-3 text-dark-grayrounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0
             md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                 Create Event
@@ -82,8 +82,8 @@
   
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useAuthStore } from '../store/authLogin';
-import ProfileMenu from './ProfileMenu.vue';
+import { useAuthStore } from '@/store/authLogin';
+import ProfileMenu from '@/components/ProfileMenu.vue';
   
 export default defineComponent({
   name: 'NavBar',

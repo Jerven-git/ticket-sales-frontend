@@ -39,3 +39,16 @@ exit
 npm install pinia-plugin-persistedstate
 clear
 exit
+npm install leaflet
+clear
+npm install @types/leaflet --save-dev
+exit
+npm install leaflet
+exit
+npm uninstall leaflet
+npm uninstall @types/leaflet
+clear
+exit
+npm install moment-timezone
+npm install @types/moment-timezone --save-dev
+exit
