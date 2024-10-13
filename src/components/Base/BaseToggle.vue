@@ -32,14 +32,14 @@ props: {
     type: String,
     default: '',
     },
-},
-emits: ['update:modelValue'], // Emit the update for v-model binding
-methods: {
-    handleClick(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.$emit('update:modelValue', target.checked); // Emit the new value
-    },
-},
+  },
+  emits: ['update:modelValue'], // Emit the update for v-model binding
+  methods: {
+      handleClick(event: Event) {
+      const target = event.target as HTMLInputElement;
+      this.$emit('update:modelValue', target.checked); // Emit the new value
+      },
+  },
 });
 </script>
   

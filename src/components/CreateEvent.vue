@@ -1,26 +1,28 @@
 <template>
     <div class="flex flex-col items-center my-10 justify-center w-full md:w-1/2 px-6 py-8 mx-auto lg:py-0">
-        <form class="space-y-4 md:space-y-6" action="#">
-            <div class="relative z-0 w-full mb-5 group">
+        <form @submit.prevent="handleSubmit" class="space-y-4 md:space-y-6" action="#">
+            <div class="relative w-full mb-5 group">
                 <BaseInput
                     type="text"
                     name="title"
                     label="Event Title"
                     placeholder="Name of event"
+                    v-model="eventTitle"
                     customClass="w-[420px]"
                 />
             </div>
-            <div class="relative z-0 w-full mb-5 group">
+            <div class="relative w-full mb-5 group">
                 <BaseInput
                     type="text"
                     name="organizer"
                     label="Organizer name"
                     placeholder="Name of organizer"
+                    v-model="eventOrganizerName"
                     customClass="w-[420px]"
                 />
             </div>
             <div class="grid md:grid-cols-2 md:gap-3">
-                <div class="relative z-0 w-full mb-5 group">
+                <div class="relative w-full mb-5 group">
                     <BaseSelect
                         name="category"
                         label="Category"
@@ -39,11 +41,20 @@
                     />
                 </div>
             </div>
-            <div class="relative z-0 w-full mb-5 group">
+            <div class="relative w-full mb-5 group">
                 <EventType />
             </div>
-            <div class="relative z-0 w-full mb-5 group">
-                <TimezoneDropdown class="w-[420px]" />
+            <div class="relative w-full mb-5 group">
+                <TimezoneDropdown
+                        class="w-[420px]"
+                        v-model="selectedTimeZone"
+                />
+            </div>
+            <div class="relative w-full mb-5 group">
+              <EventCalendar
+                class="w-[420px]"
+                v-model="selectedDateTime"
+              />
             </div>
             <div class="flex justify-center">
                 <BaseButton
@@ -64,6 +75,8 @@ import BaseSelect from '@/components/Base/BaseSelect.vue';
 import BaseSubSelect from '@/components/Base/BaseSubSelect.vue';
 import EventType from '@/components/Event/EventType.vue';
 import TimezoneDropdown from '@/components/Event/TimezoneDropdown.vue';
+import EventCalendar from '@/components/Event/EventCalendar.vue';
+
 
 export default defineComponent({
   name: 'CreateEvent',
@@ -73,12 +86,17 @@ export default defineComponent({
     BaseSelect,
     BaseSubSelect,
     EventType,
-    TimezoneDropdown
+    TimezoneDropdown,
+    EventCalendar
    },
   data() {
     return{
+        eventTitle: '',
+        eventOrganizerName: '',
         selectedCategory: '',
         selectedSubCategory: '',
+        selectedTimeZone: '',
+        selectedDateTime: { startDate: '', endDate: '', startTime: '', endTime: '', }, // Use empty strings initially
     }
   },
   methods: {
@@ -113,7 +131,20 @@ export default defineComponent({
         ];
       }
       return [{ text: 'Select a Sub-Category', value: '' }];
-    }
+    },
+
+    handleSubmit() {
+      console.log('Category:', this.eventTitle);
+      console.log('Category:', this.eventOrganizerName);
+      console.log('Category:', this.selectedCategory);
+      console.log('Sub Cat:', this.selectedSubCategory);
+      console.log('Form submitted with timezone:', this.selectedTimeZone);
+      console.log('Selected Date Time Object:', this.selectedDateTime);
+      console.log('Selected Start Date:', this.selectedDateTime.startDate);
+      console.log('Selected End Date:', this.selectedDateTime.endDate);
+      console.log('Selected Start Time:', this.selectedDateTime.startTime);
+      console.log('Selected End Time:', this.selectedDateTime.endTime);
+    },
   },
   watch: {
     selectedCategory(newVal, oldVal) {

@@ -52,3 +52,21 @@ exit
 npm install moment-timezone
 npm install @types/moment-timezone --save-dev
 exit
+clear
+npm install dayjs
+npm install vue2-datepicker
+npm install dayjs vue2-datepicker
+npm install dayjs vue3-datepicker
+clear
+npm install @types/dayjs --save-dev
+npm install dayjs
+exit
+npm install vue3-datepicker
+npm uninstall vue2-datepicker
+clear
+npm install vue3-timepicker
+clear
+exit
+npm install @types/vue3-timepicker
+clear
+exit

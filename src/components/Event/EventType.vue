@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import BaseToggle from '@/components/Base/BaseToggle.vue';
 import BaseInput from '@/components/Base/BaseInput.vue';
 import BaseTextArea from '@/components/Base/BaseTextArea.vue';
@@ -58,10 +58,10 @@ components: {
 },
  data() {
     return {
-        isOnlineEvent: ref(false),
-        location: ref(''),
-        eventLink: ref(''),
-        eventNote: ref('')
+        isOnlineEvent: false,
+        location: '',
+        eventLink: '',
+        eventNote: ''
     }
  }
 });
