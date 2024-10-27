@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async login(credentials: { email: string; password: string }) {
       try {
-        await axiosInstance.get(process.env.VUE_APP_BASE_URL + '/sanctum/csrf-cookie');
+        await axiosInstance.get('/sanctum/csrf-cookie');
         
         const response = await axiosInstance.post('/v1/auth/login', credentials);
         this.user = response.data.user;
