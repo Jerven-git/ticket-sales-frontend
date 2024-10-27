@@ -7,7 +7,6 @@ import router from '@/router';
 import axiosPlugin from '@/axios/axios';
 import notifications from '@kyvg/vue3-notification';
 import { useAuthStore } from '@/store/authLogin';
-import axios from 'axios';
 
 const app = createApp(App);
 
@@ -16,7 +15,6 @@ app.use(pinia);
 app.use(router);
 app.use(axiosPlugin);
 app.use(notifications);
-app.provide('axios', axios);
 
 // Extend Pinia with the $notify property
 pinia.use(({ store }) => {
