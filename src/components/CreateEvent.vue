@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col items-center my-10 justify-center w-full md:w-1/2 px-6 py-8 mx-auto lg:py-0">
-        <form @submit.prevent="handleSubmit" class="space-y-4 md:space-y-6" action="#">
+        <form @submit.prevent="handleSubmit" class="space-y-4 md:space-y-6 p-6">
             <div class="relative w-full mb-5 group">
                 <BaseInput
                     type="text"
@@ -8,7 +8,7 @@
                     label="Event Title"
                     placeholder="Name of event"
                     v-model="eventTitle"
-                    customClass="w-[420px]"
+                    customClass="w-[620px]"
                 />
             </div>
             <div class="relative w-full mb-5 group">
@@ -18,7 +18,7 @@
                     label="Organizer name"
                     placeholder="Name of organizer"
                     v-model="eventOrganizerName"
-                    customClass="w-[420px]"
+                    customClass="w-[620px]"
                 />
             </div>
             <div class="grid md:grid-cols-2 md:gap-3">
@@ -42,26 +42,40 @@
                 </div>
             </div>
             <div class="relative w-full mb-5 group">
-                <EventType />
+              <EventType />
             </div>
             <div class="relative w-full mb-5 group">
-                <TimezoneDropdown
-                        class="w-[420px]"
-                        v-model="selectedTimeZone"
-                />
+              <TimezoneDropdown
+                class="w-[620px]"
+                v-model="selectedTimeZone"
+              />
             </div>
             <div class="relative w-full mb-5 group">
               <EventCalendar
-                class="w-[420px]"
+                class="w-[620px]"
                 v-model="selectedDateTime"
               />
             </div>
-            <div class="flex justify-center">
-                <BaseButton
-                    label="Submit"
-                    type="submit"
-                    customClass="w-24"
-                />
+            <!-- <div class="relative w-full mb-5 group">
+              <EventImage
+                class="w-[620px]"
+                v-model="ImageTest"
+              />
+            </div> -->
+            <div class="flex flex-col items-center">
+              <BaseQuillTextEditor 
+                v-model="quillText"
+                name="editor"
+                label="Your Content" 
+                placeholder="Write here..." 
+                customClass="my-editor-class w-[620px] mb-4"
+                editorHeight="300px"
+              />
+              <BaseButton
+                  label="Submit"
+                  type="submit"
+                  customClass="w-24 mt-4"
+              />
             </div>
         </form>
     </div>
@@ -76,7 +90,8 @@ import BaseSubSelect from '@/components/Base/BaseSubSelect.vue';
 import EventType from '@/components/Event/EventType.vue';
 import TimezoneDropdown from '@/components/Event/TimezoneDropdown.vue';
 import EventCalendar from '@/components/Event/EventCalendar.vue';
-
+// import EventImage from '@/components/Event/EventImage.vue';
+import BaseQuillTextEditor from '@/components/Base/BaseQuillTextEditor.vue';
 
 export default defineComponent({
   name: 'CreateEvent',
@@ -87,7 +102,9 @@ export default defineComponent({
     BaseSubSelect,
     EventType,
     TimezoneDropdown,
-    EventCalendar
+    EventCalendar,
+    // EventImage,
+    BaseQuillTextEditor
    },
   data() {
     return{
@@ -96,7 +113,9 @@ export default defineComponent({
         selectedCategory: '',
         selectedSubCategory: '',
         selectedTimeZone: '',
-        selectedDateTime: { startDate: '', endDate: '', startTime: '', endTime: '', }, // Use empty strings initially
+        selectedDateTime: { startDate: '', endDate: '', startTime: '', endTime: '', },
+        quillText: '',
+        ImageTest: '',
     }
   },
   methods: {
@@ -144,6 +163,7 @@ export default defineComponent({
       console.log('Selected End Date:', this.selectedDateTime.endDate);
       console.log('Selected Start Time:', this.selectedDateTime.startTime);
       console.log('Selected End Time:', this.selectedDateTime.endTime);
+      console.log('Text:', this.quillText);
     },
   },
   watch: {

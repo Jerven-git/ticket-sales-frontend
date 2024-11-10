@@ -136,7 +136,8 @@
       
 <script lang="ts">
 import { defineComponent} from 'vue';
-      
+import { axiosInstance } from '@/axios/axios';
+
 export default defineComponent({
     name: 'SignUp',
     data() {
@@ -151,7 +152,7 @@ export default defineComponent({
     methods: {
     async registerUser() {
       try {
-        const response = await this.$axios.post('v1/sign-up/', {
+        const response = await axiosInstance.post('v1/sign-up/', {
           first_name: this.firstName,
           last_name: this.lastName,
           email: this.email,

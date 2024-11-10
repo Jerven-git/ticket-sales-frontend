@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({
   name: 'BaseTextArea',
@@ -39,20 +39,28 @@ export default defineComponent({
       default: '',
     },
   },
-  data() {
-    return {
-      internalValue: this.modelValue, // Initialize internal value with modelValue
-    };
-  },
-  watch: {
-    // Watch for changes in modelValue and update internalValue accordingly
-    modelValue(newValue) {
-      this.internalValue = newValue;
+  setup(props, { emit }) {
+      // Ref to hold the editor content
+      const internalValue = ref(props.modelValue);
+  
+      // Watch for changes in the modelValue prop
+      watch(
+        () => props.modelValue,
+        (newValue) => {
+          internalValue.value = newValue;
+        }
+      );
+  
+      // Emit input event to update parent component
+      const onInput = (content: string) => {
+        internalValue.value = content;
+        emit('update:modelValue', content); // Sync with v-model
+      };
+  
+      return {
+        internalValue,
+        onInput,
+      };
     },
-    // Watch for changes in internalValue to emit updates
-    internalValue(newValue) {
-      this.$emit('update:modelValue', newValue);
-    },
-  },
 });
 </script>

@@ -70,3 +70,7 @@ exit
 npm install @types/vue3-timepicker
 clear
 exit
+clear
+npm install @vueup/vue-quill@latest --save
+clear
+exit

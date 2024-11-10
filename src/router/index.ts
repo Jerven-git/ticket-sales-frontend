@@ -18,7 +18,7 @@
 // export default router;
 
  /*This code allows you to reflect the current route and directly access the routes*/
-import { createRouter, createWebHistory } from 'vue-router'
+import { createMemoryHistory, createRouter  } from 'vue-router'
 import { useAuthStore } from '@/store/authLogin'; // Import Pinia store
 import UserLogin from '@/components/UserLogin.vue';
 import HomePage from '@/components/HomePage.vue';
@@ -46,7 +46,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createMemoryHistory(),
   routes,
 });
 

@@ -12,7 +12,7 @@
             v-model="location" 
             label="Location:"
             placeholder="Enter location"
-            customClass="mb-3 w-[420px]"
+            customClass="mb-3 w-full"
         />
   
         <!-- Google Maps placeholder -->
@@ -66,4 +66,3 @@ components: {
  }
 });
 </script>
-  
