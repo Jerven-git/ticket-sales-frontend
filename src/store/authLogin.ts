@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
-import { axiosInstance } from '@/axios/axios'; // Adjust the import path as needed
+import { axiosInstance } from '@/axios/axios';
 import router from '@/router'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null,
+    user: null as any,
     isLoggedIn: false,
   }),
   getters: {
@@ -25,10 +25,10 @@ export const useAuthStore = defineStore('auth', {
     async login(credentials: { email: string; password: string }) {
       try {
         await axiosInstance.get('/sanctum/csrf-cookie');
-        
+
         const response = await axiosInstance.post('/v1/auth/login', credentials);
-        this.user = response.data.user;
-        this.isLoggedIn = true;
+        this.user = response.data.data.user;
+        this.isLoggedIn = response.data.data.isLoggedIn;
         this.$notify({
           type: 'success',
           title: 'Success',
@@ -41,7 +41,7 @@ export const useAuthStore = defineStore('auth', {
         if (error.response && error.response.data && error.response.data.error) {
             errorMessage = error.response.data.error;
         }
-    
+
         this.$notify({
             type: 'error',
             title: 'Login Failed',
@@ -61,12 +61,9 @@ export const useAuthStore = defineStore('auth', {
           router.push({ name: 'login' });
         }).catch(error => {
           console.error('Logout failed:', error);
-          this.$notify({
-            type: 'error',
-            title: 'Logout Failed',
-            text: 'An error occurred while logging out.'
-          });
+          router.push({ name: 'login' });
         });
-      }      
+      }
   },
+  persist: true,
 });

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^3.2.1",
+    "@stripe/stripe-js": "^8.7.0",
     "@vueup/vue-quill": "^1.2.0",
     "axios": "^1.7.2",
     "core-js": "^3.8.3",
