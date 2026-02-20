@@ -2,9 +2,10 @@
     <div :class="customClass">
         <label :for="name" class="block mb-2 text-sm font-medium text-gray-900">{{ label }}</label>
         <quill-editor
-            v-model="internalValue"
+            :content="internalValue"
+            content-type="html"
             :options="editorOptions"
-            @input="onInput"
+            @update:content="onContentChange"
             :placeholder="placeholder"
             class="quill-editor"
             :style="{ height: editorHeight }"
@@ -15,7 +16,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch, PropType } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill';
-import 'quill/dist/quill.snow.css';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default defineComponent({
     name: 'BaseQuillTextEditor',
@@ -28,7 +29,7 @@ export default defineComponent({
             required: true,
         },
         editorOptions: {
-            type: Object as PropType<Record<string, any>>, // Define specific Quill options as needed
+            type: Object as PropType<Record<string, any>>,
             default: () => ({
                 theme: 'snow',
             }),
@@ -56,22 +57,24 @@ export default defineComponent({
     },
     setup(props, { emit }) {
         const internalValue = ref(props.modelValue);
+
         watch(
             () => props.modelValue,
             (newValue) => {
-                internalValue.value = newValue;
+                if (newValue !== internalValue.value) {
+                    internalValue.value = newValue;
+                }
             }
         );
 
-        const onInput = (content: string) => {
-            console.log('Quill Content:', content);
+        const onContentChange = (content: string) => {
             internalValue.value = content;
             emit('update:modelValue', content);
         };
 
         return {
             internalValue,
-            onInput,
+            onContentChange,
         };
     },
 });

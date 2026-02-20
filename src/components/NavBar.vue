@@ -9,7 +9,7 @@
       v-if="!isLoggedIn"
       :to="{ name: 'login' }"
       class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg
-      text-sm px-4 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+      text-sm px-4 py-2 text-center">
       Sign In
     </router-link>
     <ProfileMenu v-else />
@@ -17,7 +17,7 @@
         data-collapse-toggle="navbar-sticky"
         type="button"
         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100
-        focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        focus:outline-none focus:ring-2 focus:ring-gray-200"
         aria-controls="navbar-sticky"
         aria-expanded="false">
          <span class="sr-only">Open main menu</span>
@@ -45,33 +45,23 @@
         <li>
             <router-link
               :to="{ name: 'home' }"
-              class="block py-2 px-3 text-dark-gray rounded md:bg-transparent md:text-dark-gray md:p-0 md:dark:text-dark-gray"
+              class="block py-2 px-3 text-dark-gray rounded md:bg-transparent md:text-dark-gray md:p-0"
               aria-current="page">
                 Home
             </router-link>
         </li>
         <li>
             <router-link
-              :to="{ name: 'home' }"
-              class="block py-2 px-3 text-dark-gray rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0
-            md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+              :to="{ name: 'events' }"
+              class="block py-2 px-3 text-dark-gray rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0">
                 Browse Events
             </router-link>
         </li>
         <li>
             <router-link
               :to="{ name: 'create-event' }"
-              class="block py-2 px-3 text-dark-grayrounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0
-            md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+              class="block py-2 px-3 text-dark-gray rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0">
                 Create Event
-            </router-link>
-        </li>
-        <li>
-            <router-link
-              :to="{ name: 'home' }"
-              class="block py-2 px-3 text-dark-gray rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0
-            md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                TIckets
             </router-link>
         </li>
         </ul>
@@ -79,12 +69,12 @@
   </div>
 </nav>
 </template>
-  
+
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useAuthStore } from '@/store/authLogin';
 import ProfileMenu from '@/components/ProfileMenu.vue';
-  
+
 export default defineComponent({
   name: 'NavBar',
   components: { ProfileMenu },

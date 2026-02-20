@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <img 
+        <img
          src="https://imgur.com/O9Wmyek.png"
          alt="Profile Picture"
          class="w-12 h-12 rounded-full cursor-pointer"
@@ -13,35 +13,33 @@
             <router-link
              :to="{ name: 'profile' }"
              class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+             @click="showMenu = false"
              >
              View profile
             </router-link>
             <router-link
-             :to="{ name: 'home' }"
+             :to="{ name: 'manage-organizers' }"
              class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+             @click="showMenu = false"
              >
-             Manage organizer
+             Manage organizers
             </router-link>
             <router-link
-             :to="{ name: 'home' }"
+             :to="{ name: 'manage-events' }"
              class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+             @click="showMenu = false"
              >
-             Manage event
+             Manage events
             </router-link>
             <router-link
-             :to="{ name: 'home' }"
+             :to="{ name: 'events' }"
              class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+             @click="showMenu = false"
              >
-             My save events
-            </router-link>
-            <router-link
-             :to="{ name: 'home' }"
-             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-             >
-             Following organizer
+             Browse events
             </router-link>
             <div
-             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+             class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
              @click="logout"
              >
              Sign out
@@ -57,16 +55,14 @@ import { useAuthStore } from '@/store/authLogin';
 export default defineComponent({
   name: 'ProfileMenu',
   data() {
-    return{
+    return {
         showMenu: false,
     }
   },
   methods: {
     toggleMenu() {
-      this.showMenu =!this.showMenu;
-      
+      this.showMenu = !this.showMenu;
     },
-    // Close the dropdown menu when clicked outside of it
     closeDropdown(event: Event) {
       const target = event.target as HTMLElement;
       if (this.$el && !this.$el.contains(target)) {
@@ -76,10 +72,9 @@ export default defineComponent({
     logout() {
       const authStore = useAuthStore();
       authStore.logout();
-      this.$router.push({ name: 'login' });
+      this.showMenu = false;
     },
   },
-  //Listener for the close Dropdown
   mounted() {
     document.addEventListener('click', this.closeDropdown);
   },

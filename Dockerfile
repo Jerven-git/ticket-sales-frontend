@@ -10,6 +10,6 @@ RUN npm i -g npm@8.5.0
 
 USER node
 
-CMD bash -c "npm install && npm run dev"
+CMD bash -c "npm install && npm run serve"
 
-EXPOSE 3000
+EXPOSE 8080
